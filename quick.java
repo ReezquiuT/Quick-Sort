@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 
-public class quick{
+public class quick {
     public static void quicksort(int[] arr, int inicio, int fin) {
         if (inicio < fin) {
             int pivoteIndex = particion(arr, inicio, fin);
@@ -9,6 +10,7 @@ public class quick{
             quicksort(arr, pivoteIndex + 1, fin);
         }
     }
+
     private static int particion(int[] arr, int inicio, int fin) {
         int pivote = arr[fin];
         int i = inicio - 1;
@@ -25,19 +27,21 @@ public class quick{
         arr[fin] = temp;
         return i + 1;
     }
+
     public static void main(String[] args) {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Escribe el nombre del archivo (ej. datos.txt):");
+            String nombreArchivo = entrada.readLine();
 
-            System.out.println("Ingresa números separados por espacios:");
-            System.out.print(" ");
+            // Ruta fija
+            String ruta = "C:\\Archivos\\" + nombreArchivo;
 
+            BufferedReader br = new BufferedReader(new FileReader(ruta));
             String linea = br.readLine();
+            br.close();
 
-           
             String[] partes = linea.trim().split("\\s+");
-
-           
             int[] numeros = new int[partes.length];
             for (int i = 0; i < partes.length; i++) {
                 numeros[i] = Integer.parseInt(partes[i]);
@@ -50,7 +54,7 @@ public class quick{
                 System.out.print(n + " ");
             }
         } catch (Exception e) {
-            System.out.println("Error al leer datos: " + e.getMessage());
+            System.out.println("Error al leer el archivo: " + e.getMessage());
         }
     }
 }
